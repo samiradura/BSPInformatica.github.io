@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Finalizar Compra - BSP Informática</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 40px;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      background: white;
+      padding: 30px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+    }
+    .produto-info {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    button {
+      background: #e30613;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #b1000f;
+    }
+    .mensagem {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Finalizar Compra</h1>
+
+    <div class="produto-info" id="info-produto">
+      <p><strong>Produto:</strong> Carregando...</p>
+    </div>
+
+    <form id="form-compra">
+      <label>Nome completo:</label>
+      <input type="text" required>
+
+      <label>Email:</label>
+      <input type="email" required>
+
+      <label>Endereço de entrega:</label>
+      <input type="text" required>
+
+      <label>Forma de pagamento:</label>
+      <input type="text" placeholder="Ex: PIX, Cartão, Dinheiro" required>
+
+      <button type="submit">Confirmar Pedido</button>
+    </form>
+
+    <div class="mensagem" id="mensagem"></div>
+  </div>
+
+  <script>
+    // Pega o nome do produto da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const produto = urlParams.get("produto");
+
+    const infoProduto = document.getElementById("info-produto");
+
+    // Simula dados dos produtos
+    const produtos = {
+      del9020: "Computador Del OPTIPLEX Modelo 9020 - R$ 899,99",
+      ezformat: "Software EzFormat - R$ 132,99",
+      blitzwolf: "Fone BlitzWolf BW-HP0 PRO - R$ 169,99",
+      ssd250: "SSD SATA 250Gb - R$ 148,99"
+    };
+
+    if (produtos[produto]) {
+      infoProduto.innerHTML = `<p><strong>Produto:</strong> ${produtos[produto]}</p>`;
+    } else {
+      infoProduto.innerHTML = `<p style="color:red;"><strong>Produto não encontrado.</strong></p>`;
+    }
+
+    // Simula envio do pedido
+    document.getElementById("form-compra").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("mensagem").innerText = "Pedido realizado com sucesso! Entraremos em contato por e-mail.";
+      this.reset();
+    });
+  </script>
+</body>
+</html>
